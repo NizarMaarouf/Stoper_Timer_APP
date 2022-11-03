@@ -36,7 +36,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
   }
 
   bool isRunning = false;
-  // by NizarMaarouf
+  
 
 
   @override
