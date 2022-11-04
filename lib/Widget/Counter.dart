@@ -12,10 +12,11 @@ class StoperTimerApp extends StatefulWidget {
 }
 
 class _StoperTimerAppState extends State<StoperTimerApp> {
+  //----------------DURATION TIME---------------------------------
   Duration deuration = Duration(seconds: 0);
   //we must put the ? in the end of Timer .....
   Timer? downSeconds;
-
+//------------------STARTTIMER FUNCTION--------------------------
   startTimer() {
     downSeconds = Timer.periodic(Duration(seconds: 1), (test) {
       setState(() {
@@ -25,6 +26,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
     });
   }
 
+//-----------------CANCELTIMER FUNCTION---------------------------
   cancelTimer() {
     int newSeconds = deuration.inSeconds;
     setState(() {
@@ -35,6 +37,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
     });
   }
 
+//---------------------STOPTIMER FUNCTION----------------------------
   stopTimer() {
     int newSeconds = deuration.inSeconds;
     setState(() {
@@ -43,6 +46,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
     });
   }
 
+//--------------------RESUMETIMER FUNCTION----------------------------
   resumeTimer() {
     int newSeconds = deuration.inSeconds;
     setState(() {
@@ -50,117 +54,134 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
     });
   }
 
+//-------------------HELPER PARAMETER--------------------------------
   bool isRunning = false;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.blue[900],
+          title: Text(
+            'STOPER',
+            style: TextStyle(fontSize: 30, color: Colors.amber),
+          ),
+          centerTitle: true,
+        ),
+//-----------------------------BODY-----------------------------------------
         body: Container(
           padding: EdgeInsets.fromLTRB(30, 8, 30, 8),
-          color: Colors.grey[900],
+          color: Colors.yellow[800],
           width: double.infinity,
           height: double.infinity,
+
 //-----------------------THE BOX'S OF THE TIMER -----------------------------
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(18),
-                    // width: 100,
-                    // height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[800],
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      deuration.inHours
-                          .remainder(24)
-                          .toString()
-                          .padLeft(2, "0"),
-                      style: TextStyle(fontSize: 50, color: Colors.amber),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(18),
-                    // width: 100,
-                    // height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[800],
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      deuration.inMinutes
-                          .remainder(60)
-                          .toString()
-                          .padLeft(2, "0"),
-                      style: TextStyle(fontSize: 50, color: Colors.amber),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(18),
-                    // width: 100,
-                    // height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[800],
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      deuration.inSeconds
-                          .remainder(60)
-                          .toString()
-                          .padLeft(2, "0"),
-                      style: TextStyle(fontSize: 50, color: Colors.amber),
-                    ),
-                  ),
-                ],
+//------------------------TITLE CREATE---------------------------------------
+              Container(
+                margin: EdgeInsets.only(bottom: 100),
+                alignment: AlignmentDirectional.center,
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blue[800],
+                  border: Border.all(width: 2, color: Colors.white),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  'Created By Nizar Maarouf',
+                  style: TextStyle(fontSize: 25, color: Colors.amber),
+                ),
               ),
-
 //----------------------TEXT : NAME OF THE TIME BOX----------------------------
               Container(
                 width: double.infinity,
                 height: 50,
-                margin: EdgeInsets.only(top: 10),
-                // padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    SizedBox(
-                      width: 30,
-                    ),
                     Text(
                       'Hours',
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 50,
+                          color: Colors.blue[800]),
                     ),
                     Text(
                       'Minutes',
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 35,
+                          color: Colors.blue[800]),
                     ),
                     Text(
                       'Seconds',
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Colors.blue[800]),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[800],
+                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        deuration.inHours
+                            .remainder(24)
+                            .toString()
+                            .padLeft(2, "0"),
+                        style: TextStyle(fontSize: 50, color: Colors.amber),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(18),
+                      // width: 100,
+                      // height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[800],
+                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        deuration.inMinutes
+                            .remainder(60)
+                            .toString()
+                            .padLeft(2, "0"),
+                        style: TextStyle(fontSize: 50, color: Colors.amber),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(18),
+                      // width: 100,
+                      // height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[800],
+                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        deuration.inSeconds
+                            .remainder(60)
+                            .toString()
+                            .padLeft(2, "0"),
+                        style: TextStyle(fontSize: 50, color: Colors.amber),
+                      ),
                     ),
                   ],
                 ),
@@ -215,7 +236,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
                         // foregroundColor: Colors.white,
                         backgroundColor: Colors.blue[900],
                         minimumSize: Size(80, 35),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                       ),
                       onPressed: () {
                         startTimer();
@@ -226,7 +247,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
                       child: Text(
                         'Start Timer',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     )
             ],
