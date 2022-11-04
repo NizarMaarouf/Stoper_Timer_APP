@@ -35,9 +35,22 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
     });
   }
 
-  bool isRunning = false;
-  
+  stopTimer() {
+    int newSeconds = deuration.inSeconds;
+    setState(() {
+      downSeconds!.cancel();
+      isRunning = true;
+    });
+  }
 
+  resumeTimer() {
+    int newSeconds = deuration.inSeconds;
+    setState(() {
+      startTimer();
+    });
+  }
+
+  bool isRunning = false;
 
   @override
   Widget build(BuildContext context) {
@@ -166,10 +179,12 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                           ),
                           onPressed: () {
-                            downSeconds!.cancel();
+                            (downSeconds!.isActive)
+                                ? stopTimer()
+                                : resumeTimer();
                           },
                           child: Text(
-                            'Stop Timer',
+                            downSeconds!.isActive ? 'Stop' : 'Resume',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -182,7 +197,7 @@ class _StoperTimerAppState extends State<StoperTimerApp> {
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.red,
                             minimumSize: Size(80, 35),
-                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                           ),
                           onPressed: () {
                             cancelTimer();
